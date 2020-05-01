@@ -7,7 +7,7 @@ terraform {
   required_version = ">= 0.12"
 
   backend "s3" {
-    bucket  = "tfstate-bucket"
+    bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
     key     = "lb/terraform.tfstate"
     encrypt = true
@@ -22,7 +22,7 @@ data "terraform_remote_state" "security_group" {
   backend = "s3"
 
   config = {
-    bucket  = "tfstate-bucket"
+    bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
     key     = "security_group/terraform.tfstate"
   }
@@ -32,7 +32,7 @@ data "terraform_remote_state" "ec2" {
   backend = "s3"
 
   config = {
-    bucket  = "tfstate-bucket"
+    bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
     key     = "ec2/terraform.tfstate"
   }

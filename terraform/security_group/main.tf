@@ -7,7 +7,7 @@ terraform {
   required_version = ">= 0.12"
 
   backend "s3" {
-    bucket  = "tfstate-bucket"
+    bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
     key     = "security_group/terraform.tfstate"
     encrypt = true
