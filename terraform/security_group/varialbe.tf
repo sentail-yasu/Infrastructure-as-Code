@@ -3,5 +3,5 @@ variable "vpc_id" {
 }
 
 variable "app_name" {
-  default = "ys-sg"
+  default = "ys"
 }
