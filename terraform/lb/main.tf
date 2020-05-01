@@ -1,7 +1,7 @@
 provider "aws" {
   region  = "ap-northeast-1"
   version = "2.12.0"
-  profile = "your-profile"
+  profile = "ys-profile"
 }
 
 terraform {
@@ -12,7 +12,7 @@ terraform {
     region  = "ap-northeast-1"
     key     = "lb/terraform.tfstate"
     encrypt = true
-    profile = "your-profile"
+    profile = "ys-profile"
   }
 }
 
@@ -27,7 +27,7 @@ data "terraform_remote_state" "security_group" {
     bucket  = "tfstate-bucket"
     region  = "ap-northeast-1"
     key     = "security_group/terraform.tfstate"
-    profile = "your-profile"
+    profile = "ys-profile"
   }
 }
 
@@ -38,7 +38,7 @@ data "terraform_remote_state" "ec2" {
     bucket  = "tfstate-bucket"
     region  = "ap-northeast-1"
     key     = "ec2/terraform.tfstate"
-    profile = "your-profile"
+    profile = "ys-profile"
   }
 }
 

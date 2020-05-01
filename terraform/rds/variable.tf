@@ -1,5 +1,5 @@
 variable "vpc_id" {
-  default = "your-vpc-id"
+  default = "vpc-00447116891e95ae7"
 }
 
 variable "subnet_group" {

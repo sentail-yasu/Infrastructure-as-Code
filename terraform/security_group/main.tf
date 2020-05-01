@@ -1,6 +1,7 @@
 provider "aws" {
   region  = "ap-northeast-1"
   version = "2.12.0"
+  profile = "ys-profile"
 }
 
 terraform {
@@ -11,6 +12,7 @@ terraform {
     region  = "ap-northeast-1"
     key     = "security_group/terraform.tfstate"
     encrypt = true
+    profile = "ys-profile"
   }
 }
 
