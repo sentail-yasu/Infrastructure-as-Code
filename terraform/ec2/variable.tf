@@ -22,5 +22,5 @@ variable "key_pair" {
 }
 
 variable "app_name" {
-  default = "your-app"
+  default = "ys-app"
 }
