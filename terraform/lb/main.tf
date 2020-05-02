@@ -13,6 +13,15 @@ terraform {
     encrypt = true
   }
 }
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+
+  config = {
+    bucket  = "tfstate-bucket-ys"
+    region  = "ap-northeast-1"
+    key     = "vpc/terraform.tfstate"
+  }
+}
 
 data "aws_acm_certificate" "acm" {
   domain = var.acm_domain_name
@@ -54,7 +63,7 @@ resource "aws_lb_target_group" "lb_target_group" {
   name        = "${var.app_name}-tg"
   port        = var.port
   protocol    = var.protocol
-  vpc_id      = var.vpc_id
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
   target_type = var.target_type
 
   health_check {
@@ -83,5 +92,5 @@ resource "aws_lb_listener" "lb_listener" {
 resource "aws_lb_target_group_attachment" "lb_target_group_attch" {
   count            = data.terraform_remote_state.ec2.outputs.instance_count
   target_group_arn = aws_lb_target_group.lb_target_group.arn
-  target_id        = keys(data.terraform_remote_state.ec2.outputs.instance_ids)[count.index]
+  target_id        = keys(data.terraform_remote_state.ec2.outputs.instance_ids_web)[count.index]
 }

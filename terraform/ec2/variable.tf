@@ -1,3 +1,13 @@
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+
+  config = {
+    bucket  = "tfstate-bucket-ys"
+    region  = "ap-northeast-1"
+    key     = "vpc/terraform.tfstate"
+  }
+}
+
 variable "ami_id" {
   default = "ami-0f310fced6141e627"
 }
@@ -8,14 +18,14 @@ variable "instance_count" {
 
 variable "public_subnets" {
   default = {
-    "0" = "subnet-0a29747fa51caf8f6"
-    "1" = "subnet-0914faa9517e5aab8"
+    "0" = data.terraform_remote_state.vpc.outputs.subnet_public_a_id
+    "1" = data.terraform_remote_state.vpc.outputs.subnet_public_c_id
   }
 }
 variable "private_subnets" {
   default = {
-    "0" = "subnet-0814e4fe2afac3424"
-    "1" = "subnet-03156f0e99491e983"
+    "0" = data.terraform_remote_state.vpc.outputs.subnet_private_a_id
+    "1" = data.terraform_remote_state.vpc.outputs.subnet_private_c_id
   }
 }
 
