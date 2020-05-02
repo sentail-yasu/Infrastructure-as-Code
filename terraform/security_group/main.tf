@@ -38,6 +38,10 @@ resource "aws_security_group" "bastion_security_group" {
   }
 }
 
+output "bastion_sg_id" {
+  value = aws_security_group.ec2_security_group.id
+}
+
 # private_subnets EC2 に設定するセキュリティグループ
 resource "aws_security_group" "ec2_security_group" {
   name   = "${var.app_name}-sg"
@@ -69,7 +73,7 @@ resource "aws_security_group" "ec2_security_group" {
   }
 }
 
-output "ec2_sg_id" {
+output "web_sg_id" {
   value = aws_security_group.ec2_security_group.id
 }
 
