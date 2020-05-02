@@ -112,7 +112,7 @@ resource "aws_route_table_association" "private-c" {
 }
 
 output "vpc_id" {
-  value = aws_vpc.this.id
+  value = aws_vpc.vpc.id
 }
 
 output "subnet_public_a_id" {
