@@ -1,5 +1,5 @@
 variable "ami_id" {
-  default = "ami-08360a37d07f61f88"
+  default = "ami-0f310fced6141e627"
 }
 
 variable "instance_count" {
@@ -8,9 +8,8 @@ variable "instance_count" {
 
 variable "subnets" {
   default = {
-    "0" = "subnet-0e5c9e24559a2bc69"
-    "1" = "subnet-0d3cf3ee80f2343ad"
-"
+    "0" = "subnet-0a29747fa51caf8f6"
+    "1" = "subnet-0914faa9517e5aab8"
   }
 }
 
