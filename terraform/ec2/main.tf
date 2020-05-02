@@ -30,7 +30,7 @@ resource "aws_instance" "ec2" {
   instance_type          = var.instance_type
   key_name               = var.key_pair
   subnet_id              = lookup(var.public_subnets, count.index % 2)
-  vpc_security_group_ids = [data.terraform_remote_state.security_group.outputs.bastion_sg_id]
+  vpc_security_group_ids = [data.terraform_remote_state.security_group.outputs.ys-dev-bastion_sg_id]
 
   tags = {
     Name = "${var.bastion_name}_${count.index + 1}"
