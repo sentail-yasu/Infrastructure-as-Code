@@ -9,7 +9,7 @@ variable "instance_count" {
 variable "subnets" {
   default = {
     "0" = "subnet-0e5c9e24559a2bc69"
-    "1" = "subnet-0d3cf3ee80f2343ad
+    "1" = "subnet-0d3cf3ee80f2343ad"
 "
   }
 }
