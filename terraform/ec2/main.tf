@@ -14,13 +14,13 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "security_group" {
+data "terraform_remote_state" "vpc" {
   backend = "s3"
 
   config = {
     bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
-    key     = "security_group/terraform.tfstate"
+    key     = "vpc/terraform.tfstate"
   }
 }
 
