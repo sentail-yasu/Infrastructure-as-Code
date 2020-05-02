@@ -29,7 +29,7 @@ resource "aws_instance" "ec2" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = var.key_pair
-  subnet_id              = lookup(var.subnets, count.index % 2)
+  subnet_id              = lookup(var.public_subnets, count.index % 2)
   vpc_security_group_ids = [data.terraform_remote_state.security_group.outputs.ec2_sg_id]
 
   tags = {

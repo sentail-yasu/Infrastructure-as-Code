@@ -3,5 +3,9 @@ variable "vpc_id" {
 }
 
 variable "app_name" {
-  default = "ys"
+  default = "ys-dev-web"
+}
+
+variable "bastion_name" {
+  default = "ys-dev-bastion"
 }
