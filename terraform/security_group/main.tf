@@ -14,10 +14,20 @@ terraform {
   }
 }
 
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+
+  config = {
+    bucket  = "tfstate-bucket-ys"
+    region  = "ap-northeast-1"
+    key     = "vpc/terraform.tfstate"
+  }
+}
+
 # bastionに設定するセキュリティグループ
 resource "aws_security_group" "bastion_security_group" {
   name   = "${var.bastion_name}-sg"
-  vpc_id = var.vpc_id
+  vpc_id = [data.terraform_remote_state.vpc.outputs.vpc_id]
 
   ingress {
     from_port   = "22"
@@ -45,7 +55,7 @@ output "bastion_sg_id" {
 # private_subnets EC2 に設定するセキュリティグループ
 resource "aws_security_group" "web_security_group" {
   name   = "${var.app_name}-sg"
-  vpc_id = var.vpc_id
+  vpc_id = [data.terraform_remote_state.vpc.outputs.vpc_id]
 
   ingress {
     from_port   = "22"
@@ -80,7 +90,7 @@ output "web_sg_id" {
 # ロードバランサーに設定するセキュリティグループ
 resource "aws_security_group" "lb_security_group" {
   name   = "${var.app_name}-lb-sg"
-  vpc_id = var.vpc_id
+  vpc_id = [data.terraform_remote_state.vpc.outputs.vpc_id]
 
   ingress {
     from_port   = "443"
@@ -108,7 +118,7 @@ output "lb_sg_id" {
 # RDSに設定するセキュリティグループ
 resource "aws_security_group" "db_security_group" {
   name   = "${var.app_name}-db-sg"
-  vpc_id = var.vpc_id
+  vpc_id = [data.terraform_remote_state.vpc.outputs.vpc_id]
 
   ingress {
     from_port       = "3306"
