@@ -14,13 +14,13 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "vpc" {
+data "terraform_remote_state" "security_group" {
   backend = "s3"
 
   config = {
     bucket  = "tfstate-bucket-ys"
     region  = "ap-northeast-1"
-    key     = "vpc/terraform.tfstate"
+    key     = "security_group/terraform.tfstate"
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_instance" "bastion_ec2" {
   }
 }
 
-output "instance_ids_bastion" {
+output "instance_ids_bastion_public" {
   value = {
     for instance in aws_instance.bastion_ec2 :
     instance.id => instance.public_ip
@@ -57,7 +57,7 @@ resource "aws_instance" "web_ec2" {
   }
 }
 
-output "instance_ids_web" {
+output "instance_ids_web_private" {
   value = {
     for instance in aws_instance.web_ec2 :
     instance.id => instance.private_ip
