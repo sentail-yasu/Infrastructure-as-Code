@@ -1,5 +1,5 @@
 variable "acm_domain_name" {
-  default = "*.your.domain"
+  default = "*.knowledge-aws.work"
 }
 
 variable "vpc_id" {
@@ -8,7 +8,7 @@ variable "vpc_id" {
 
 variable "subnet_ids" {
   type    = list(string)
-  default = ["subnet-000111222", "subnet-333444555"]
+  default = ["subnet-0a29747fa51caf8f6", "subnet-0914faa9517e5aab8"]
 }
 
 variable "app_name" {
