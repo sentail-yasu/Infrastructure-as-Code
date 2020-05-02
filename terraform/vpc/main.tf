@@ -24,12 +24,14 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "public-a" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.subnet_cidr["public-a"]
+  map_public_ip_on_launch = true
   availability_zone = "ap-northeast-1a"
 }
 
 resource "aws_subnet" "public-c" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.subnet_cidr["public-c"]
+  map_public_ip_on_launch = true
   availability_zone = "ap-northeast-1c"
 }
 
