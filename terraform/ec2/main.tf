@@ -37,6 +37,13 @@ resource "aws_instance" "bastion_ec2" {
   }
 }
 
+output "instance_ids" {
+  value = {
+    for instance in aws_instance.bastion_ec2 :
+    instance.id => instance.public_ip
+  }
+}
+
 resource "aws_instance" "web_ec2" {
   count                  = var.instance_count
   ami                    = var.ami_id
@@ -52,7 +59,7 @@ resource "aws_instance" "web_ec2" {
 
 output "instance_ids" {
   value = {
-    for instance in aws_instance.bastion_ec2 :
+    for instance in aws_instance.web_ec2 :
     instance.id => instance.private_ip
   }
 }
