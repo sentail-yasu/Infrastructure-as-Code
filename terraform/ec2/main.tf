@@ -53,7 +53,7 @@ resource "aws_instance" "web_ec2" {
   vpc_security_group_ids = [data.terraform_remote_state.security_group.outputs.web_sg_id]
 
   tags = {
-    Name = "${var.bastion_name}_${count.index + 1}"
+    Name = "${var.app_name}_${count.index + 1}"
   }
 }
 

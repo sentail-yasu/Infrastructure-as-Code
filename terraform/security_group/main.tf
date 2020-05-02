@@ -39,11 +39,11 @@ resource "aws_security_group" "bastion_security_group" {
 }
 
 output "bastion_sg_id" {
-  value = aws_security_group.ec2_security_group.id
+  value = aws_security_group.bastion_security_group.id
 }
 
 # private_subnets EC2 に設定するセキュリティグループ
-resource "aws_security_group" "ec2_security_group" {
+resource "aws_security_group" "web_security_group" {
   name   = "${var.app_name}-sg"
   vpc_id = var.vpc_id
 
@@ -74,7 +74,7 @@ resource "aws_security_group" "ec2_security_group" {
 }
 
 output "web_sg_id" {
-  value = aws_security_group.ec2_security_group.id
+  value = aws_security_group.web_security_group.id
 }
 
 # ロードバランサーに設定するセキュリティグループ
