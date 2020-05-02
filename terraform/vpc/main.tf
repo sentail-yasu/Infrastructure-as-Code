@@ -33,6 +33,9 @@ resource "aws_subnet" "public-c" {
   cidr_block        = var.subnet_cidr["public-c"]
   map_public_ip_on_launch = true
   availability_zone = "ap-northeast-1c"
+  tags{
+    Name = "ys-pubclic-1c"
+  }
 }
 
 resource "aws_subnet" "private-a" {
