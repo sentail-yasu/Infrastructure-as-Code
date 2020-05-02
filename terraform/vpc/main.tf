@@ -20,7 +20,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true # DNS解決を有効化
 
   tags {
-    Name = "${var.vpc_name_tag}"
+    Name = "ys-vpc"
   }
 }
 
