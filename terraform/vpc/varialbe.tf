@@ -3,6 +3,9 @@ variable "vpc_name_tag" {
   default = "ys-vpc"
 }
 
+variable "vpc_cidr"{
+  default = "10.0.0.0/16"
+}
 ## Subnet
 variable "subnet_cidr" {
   type = "map"
