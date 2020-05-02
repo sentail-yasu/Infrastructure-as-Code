@@ -4,7 +4,7 @@ variable "vpc_name_tag" {
 }
 
 variable "vpc_cidr"{
-  default = "10.0.0.0/16"
+  default = "10.1.0.0/16"
 }
 ## Subnet
 variable "subnet_cidr" {
