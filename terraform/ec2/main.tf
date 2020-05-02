@@ -25,7 +25,7 @@ data "terraform_remote_state" "security_group" {
 }
 
 resource "aws_instance" "bastion_ec2" {
-  count                  = var.instance_count
+  count                  = 1
   ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = var.key_pair
