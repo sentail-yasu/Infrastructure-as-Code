@@ -20,7 +20,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true # DNS解決を有効化
 
   tags {
-    Name = var.vpc_name_tag
+    Name = "${var.vpc_name_tag}"
   }
 }
 
@@ -87,9 +87,4 @@ resource "aws_route" "route" {
   gateway_id             = aws_internet_gateway.igw.id
   route_table_id         = aws_route_table.rt.id
   destination_cidr_block = "0.0.0.0/0"
-}
-
-# apply後にElastic IPのパブリックIPを出力する
-output "public_ip" {
-  value = aws_eip.example.public_ip
 }
