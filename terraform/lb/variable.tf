@@ -3,7 +3,7 @@ variable "acm_domain_name" {
 }
 
 variable "vpc_id" {
-  default = "your-vpc-id"
+  default = "vpc-0a2255c398b001a89"
 }
 
 variable "subnet_ids" {
