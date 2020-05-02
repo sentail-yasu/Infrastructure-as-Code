@@ -1,6 +1,6 @@
 ## VPC Name Tag
 variable "vpc_name_tag" {
-  default = "terraform-import-vpc"
+  default = "ys-vpc"
 }
 
 ## Subnet
@@ -19,9 +19,17 @@ variable "subnet_name_tag" {
   type = "map"
 
   default = {
-    public-a  = "terraform-import-public-subnet-a"
-    public-c  = "terraform-import-public-subnet-c"
-    private-a = "terraform-import-private-subnet-a"
-    private-c = "terraform-import-private-subnet-c"
+    public-a  = "public-subnet-a"
+    public-c  = "public-subnet-c"
+    private-a = "private-subnet-a"
+    private-c = "private-subnet-c"
   }
+}
+
+variable "igw_name_tag" {
+  default = "ys-igw"
+}
+
+variable "rt_name_tag" {
+  default = "ys-rt"
 }
