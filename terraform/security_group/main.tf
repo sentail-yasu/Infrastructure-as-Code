@@ -14,7 +14,31 @@ terraform {
   }
 }
 
-# EC2に設定するセキュリティグループ
+# bastionに設定するセキュリティグループ
+resource "aws_security_group" "bastion_security_group" {
+  name   = "${var.bastion_name}-sg"
+  vpc_id = var.vpc_id
+
+  ingress {
+    from_port   = "22"
+    to_port     = "22"
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.bastion_name}-sg"
+  }
+}
+
+# private_subnets EC2 に設定するセキュリティグループ
 resource "aws_security_group" "ec2_security_group" {
   name   = "${var.app_name}-sg"
   vpc_id = var.vpc_id
@@ -23,7 +47,7 @@ resource "aws_security_group" "ec2_security_group" {
     from_port   = "22"
     to_port     = "22"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.bastion_security_group.id]
   }
 
   ingress {

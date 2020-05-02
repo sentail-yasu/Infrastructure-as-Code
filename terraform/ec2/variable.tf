@@ -28,5 +28,9 @@ variable "key_pair" {
 }
 
 variable "app_name" {
-  default = "ys-app"
+  default = "ys-dev-web"
+}
+
+variable "bastion_name" {
+  default = "ys-dev-bastion"
 }
