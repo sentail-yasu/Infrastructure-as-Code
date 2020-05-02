@@ -16,50 +16,80 @@ terraform {
 
 # VPC
 resource "aws_vpc" "vpc" {
-  cidr_block = "${var.vpc_cidr}"
+  cidr_block = var.vpc_cidr
+  enable_dns_support   = true # DNS解決を有効化
 
   tags {
-    Name = "${var.vpc_name_tag}"
+    Name = var.vpc_name_tag
   }
 }
 
 # Subnet
 resource "aws_subnet" "public-a" {
-  vpc_id            = "${aws_vpc.vpc.id}"
-  cidr_block        = "${var.subnet_cidr["public-a"]}"
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet_cidr["public-a"]
   availability_zone = "ap-northeast-1a"
 
   tags {
-    Name = "${var.subnet_name_tag["public-a"]}"
+    Name = var.subnet_name_tag["public-a"]
   }
 }
 
 resource "aws_subnet" "public-c" {
-  vpc_id            = "${aws_vpc.vpc.id}"
-  cidr_block        = "${var.subnet_cidr["public-c"]}"
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet_cidr["public-c"]
   availability_zone = "ap-northeast-1c"
 
   tags {
-    Name = "${var.subnet_name_tag["public-c"]}"
+    Name = var.subnet_name_tag["public-c"]
   }
 }
 
 resource "aws_subnet" "private-a" {
-  vpc_id            = "${aws_vpc.vpc.id}"
-  cidr_block        = "${var.subnet_cidr["private-a"]}"
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet_cidr["private-a"]
   availability_zone = "ap-northeast-1a"
 
   tags {
-    Name = "${var.subnet_name_tag["private-a"]}"
+    Name = var.subnet_name_tag["private-a"]
   }
 }
 
 resource "aws_subnet" "private-c" {
-  vpc_id            = "${aws_vpc.vpc.id}"
-  cidr_block        = "${var.subnet_cidr["private-c"]}"
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet_cidr["private-c"]
   availability_zone = "ap-northeast-1c"
 
   tags {
-    Name = "${var.subnet_name_tag["private-c"]}"
+    Name = var.subnet_name_tag["private-c"]
   }
+}
+
+# Internet Gateway
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = var.igw_name_tag
+  }
+}
+
+# Route Table
+resource "aws_route_table" "rt" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = var.rt_name_tag
+  }
+}
+
+resource "aws_route" "route" {
+  gateway_id             = aws_internet_gateway.igw.id
+  route_table_id         = aws_route_table.rt.id
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+# apply後にElastic IPのパブリックIPを出力する
+output "public_ip" {
+  value = aws_eip.example.public_ip
 }
