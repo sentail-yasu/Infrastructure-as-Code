@@ -18,7 +18,7 @@ variable "instance_type" {
 }
 
 variable "key_pair" {
-  default = "your-keypair"
+  default = "s3_test"
 }
 
 variable "app_name" {
