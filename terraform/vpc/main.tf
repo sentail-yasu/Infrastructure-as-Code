@@ -27,8 +27,8 @@ resource "aws_eip" "nat" {
 
 # NatGateway
 resource "aws_nat_gateway" "nat" {
-  allocation_id = "${aws_eip.nat.id}"
-  subnet_id = "${aws_subnet.public-a.id}"
+  allocation_id = aws_eip.nat.id
+  subnet_id = aws_subnet.public-a.id
 }
 
 # Subnet
