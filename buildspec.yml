@@ -7,6 +7,7 @@ phases:
     commands:
       - yum install unzip -y
       - wget https://releases.hashicorp.com/terraform/"$TF_VERSION"/terraform_"$TF_VERSION"_linux_amd64.zip
+      - rm -rf terraform/
       - unzip -o terraform_"$TF_VERSION"_linux_amd64.zip
 #      - unzip terraform_0.12.19_linux_amd64.zip
       - mv terraform /usr/local/bin/
